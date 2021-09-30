@@ -1,73 +1,103 @@
 import java.util.ArrayList;
+
+import org.junit.Before;
 import org.junit.Test;
 
 // Below import means we do not need to instantiate the Assert class:
 import static org.junit.Assert.*;
 
-// Sheen Estevez
-// Cindy Vortex
-// Nick Dean
-
 public class StudentTest {
+
+    private Student studentOne;
+    private Student studentTwo;
+    private Student studentThree;
+    private Student studentFour;
+
+    @Before
+    public void setup() {
+        studentOne = new Student(1L, "Kyle Schrader");
+        studentTwo = new Student(2L, "Jimmy Neutron");
+        studentThree = new Student(3L, "Sheen Estevez");
+        studentFour = new Student(4L, "Carl Wheezer");
+    }
+
     @Test
     public void testGetId() {
-        ArrayList<Integer> testArray = new ArrayList<>();
+        assertEquals(1L, studentOne.getId());
+        assertEquals(2L, studentTwo.getId());
+        assertEquals(3L, studentThree.getId());
+        assertEquals(4L, studentFour.getId());
 
-        Student jimmy = new Student(1234567, "Jimmy Neutron", testArray);
-
-        assertEquals(1234567, jimmy.getId());
     }
 
     @Test
     public void testGetName() {
-        ArrayList<Integer> testArray = new ArrayList<>();
-
-        Student sheen = new Student(1234567, "Sheen Estevez", testArray);
-
-        assertEquals("Sheen Estevez", sheen.getName());
+      assertEquals("Kyle Schrader", studentOne.getName());
+      assertEquals("Jimmy Neutron", studentTwo.getName());
+      assertEquals("Sheen Estevez", studentThree.getName());
+      assertEquals("Carl Wheezer", studentFour.getName());
     }
 
     @Test
     public void testAddGrade() {
         ArrayList<Integer> testArray = new ArrayList<>();
-        ArrayList<Integer> testArrayTwo = new ArrayList<>();
+        testArray.add(97);
+        testArray.add(57);
+        testArray.add(77);
 
-        Student nick = new Student(1234567, "Nick Dean", testArray);
+        studentOne.addGrade(97);
+        studentOne.addGrade(57);
+        studentOne.addGrade(77);
 
-        nick.addGrade(99);
-        testArrayTwo.add(99);
+        studentTwo.addGrade(100);
+        studentTwo.addGrade(0);
+        studentTwo.addGrade(0);
 
-        assertEquals(testArrayTwo, nick.getGrades());
+        studentThree.addGrade(97);
+        studentThree.addGrade(57);
+        studentThree.addGrade(77);
+
+        studentFour.addGrade(44);
+        studentFour.addGrade(13);
+        studentFour.addGrade(86);
+
+        assertEquals(testArray, studentOne.getGrades());
+        assertNotEquals(testArray, studentTwo.getGrades());
+        assertEquals(testArray, studentThree.getGrades());
+        assertNotEquals(testArray, studentFour.getGrades());
     }
 
     @Test
     public void testGetGrades() {
         ArrayList<Integer> testArray = new ArrayList<>();
-        ArrayList<Integer> testArrayTwo = new ArrayList<>();
 
-        Student cindy = new Student(1234567, "Cindy Vortex", testArray);
-
-        cindy.addGrade(100);
-        cindy.addGrade(100);
-        cindy.addGrade(99);
-
-        testArrayTwo.add(100);
-        testArrayTwo.add(100);
-        testArrayTwo.add(99);
-
-        assertEquals(testArrayTwo , cindy.getGrades());
+        assertEquals(testArray , studentOne.getGrades());
     }
 
     @Test
     public void testGetGradeAverage() {
+        studentOne.addGrade(97);
+        studentOne.addGrade(57);
+        studentOne.addGrade(77);
+
+        assertEquals(77.0, studentOne.getGradeAverage(), .5);
+    }
+
+    @Test
+    public void testUpdateGrade() {
         ArrayList<Integer> testArray = new ArrayList<>();
 
-        Student carl = new Student(1234567, "Carl Wheezer", testArray);
+        studentOne.addGrade(100);
+        studentOne.addGrade(100);
+        studentOne.addGrade(100);
 
-        carl.addGrade(97);
-        carl.addGrade(57);
-        carl.addGrade(77);
+        testArray.add(100);
+        testArray.add(98);
+        testArray.add(100);
 
-        assertEquals(77.0, carl.getGradeAverage(), 0);
+        studentOne.updateGrade(2, 98);
+
+        assertEquals(testArray , studentOne.getGrades());
+
     }
 }

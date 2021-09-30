@@ -5,7 +5,7 @@ public class Student {
     private String name;
     private ArrayList<Integer> grades;
 
-    public Student(long id, String name, ArrayList<Integer> grades) {
+    public Student(long id, String name) {
         this.id = id;
         this.name = name;
         this.grades = new ArrayList<>();
@@ -33,5 +33,10 @@ public class Student {
             sum += grade;
         }
         return (sum / grades.size());
+    }
+
+    public void updateGrade(int gradeIndex, int grade) {
+        int index = gradeIndex - 1;
+        this.grades.set(index, grade);
     }
 }
