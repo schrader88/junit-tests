@@ -28,6 +28,19 @@ public class StudentTest {
     }
 
     @Test
+    public void testAddGrade() {
+        ArrayList<Integer> testArray = new ArrayList<>();
+        ArrayList<Integer> testArrayTwo = new ArrayList<>();
+
+        Student nick = new Student(1234567, "Nick Dean", testArray);
+
+        nick.addGrade(99);
+        testArrayTwo.add(99);
+
+        assertEquals(testArrayTwo, nick.getGrades());
+    }
+
+    @Test
     public void testGetGrades() {
         ArrayList<Integer> testArray = new ArrayList<>();
         ArrayList<Integer> testArrayTwo = new ArrayList<>();
